@@ -1,0 +1,99 @@
+//Addition
+global proc float Add(float $addNumbers[])
+{
+    float $sum = 0;
+    
+    for ($i = 0; $i < size($addNumbers); $i++)
+    {
+        $sum += $addNumbers[$i];
+    }
+    
+    return $sum;
+}
+Add({20, 15, 5}); 
+
+//Subtraction
+global proc float Subtract(float $subNumbers[])
+{
+    float $total = $subNumbers[0];
+    
+    for ($i = 1; $i < size($subNumbers); $i++)
+    {
+        $total -= $subNumbers[$i];
+    }
+    
+    return $total;
+}
+Subtract({60, 15, 5});
+
+//Multiplication
+global proc float Multiply(float $multNumbers[])
+{
+    float $total = $multNumbers[0];
+    
+    for ($i = 0; $i < size($multNumbers); $i++)
+    {
+        $total *= $multNumbers[$i];
+    }
+    
+    return $total;
+}
+Multiply({1, 2, 20});
+
+//Division
+global proc float Division(float $divNumbers[])
+{
+    float $total = $divNumbers[0];
+    
+    for ($i = 1; $i < size($divNumbers); $i++)
+    {
+        $total /= $divNumbers[$i];
+    }
+    
+    return $total;
+}
+Division({80, 2});
+
+//PowerOf
+global proc float PowerOf(float $powNumbers[])
+{
+    float $number = $powNumbers[0];
+    
+    for ($i = 1; $i < size($powNumbers); $i++)
+    {
+        pow $powNumbers[0] $powNumbers[1];
+    }
+    
+    return `pow $powNumbers[0] $powNumbers[1]`;
+}
+PowerOf({2, 4});
+
+//Average
+global proc float Average(float $average[])
+{
+    float $total = $average[0];
+    
+    for ($i = 1; $i < size($average); $i++)
+    {
+        $total += $average[$i];
+    }
+    
+    return $total / size($average);
+}
+Average({15, 5, 5, 5, 10});
+//Median
+global proc float Median(float $median[])
+{
+    sort($median);
+    
+    return size($median) / 2.0;
+}
+Median({15, 5, 5, 5, 10});
+//Mode
+global proc float Mode(float $mode[])
+{    
+    sort($mode);
+    return floatArrayCount(5, $mode);
+}
+Mode({15, 5, 5, 5, 10});
+
