@@ -84,11 +84,25 @@ Average({15, 5, 5, 5, 10});
 //Median
 global proc float Median(float $median[])
 {
-    sort($median);
+    float $medianValue;
+    int $size = size($median);
     
-    $i = size($median) / 2;
+    $median = sort($median);
     
-    return $median[$i];
+    if ($size % 2 == 0)
+    {
+        int $highNumber = ($size / 2);
+        int $lowNumber = $highNumber - 1;
+        $medianValue = ($median[$highNumber] + $median[$lowNumber]) / 2;
+    }
+    
+    else 
+    {
+        int $number = ($size - 1) / 2;
+        $medianValue = $median[$number];
+    }
+    
+    return $medianValue;
     
 }
 Median({15, 5, 5, 5, 4, 4, 2});
