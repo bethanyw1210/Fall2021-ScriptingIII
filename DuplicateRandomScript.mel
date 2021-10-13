@@ -1,0 +1,25 @@
+select -r pSphere1;
+
+global proc GenerateRandomObj(int $dupAmount, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+    string $objects[] = `ls -sl`;
+    float $valueX;
+    float $valueY;
+    float $valueZ;
+    string $duplicates[];
+    
+    for($i = 0; $i < size($objects); $i++)
+    {
+        for($j = 0; $j < ($dupAmount); $j++)
+        {
+            $duplicates = `duplicate $objects[$i]`;
+            
+            $valueX = `rand $minX $maxX`;
+            $valueY = `rand $minY $maxY`;
+            $valueZ = `rand $minZ $maxZ`;
+            
+            move -x $valueX -y $valueY -z $valueZ $duplicates;
+        }
+    }
+}
+GenerateRandomObj(4, 0, 25, 0, 10, 0, 25);
