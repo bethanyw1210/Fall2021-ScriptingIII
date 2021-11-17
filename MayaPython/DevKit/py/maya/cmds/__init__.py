@@ -3430,7 +3430,7 @@ def StraightenUVBorderOptions(*args, **keywords): pass
 def subdToPoly(*args, **kwargs): pass
 def arrayMapper(*args, **kwargs): pass
 def CreateFluidCacheOptions(*args, **keywords): pass
-def circle(*args, **kwargs): pass
+def circle(*args, **kwargs) -> object: pass
 def SquareSurfaceOptions(*args, **keywords): pass
 def SmoothingDisplayShowBoth(*args, **keywords): pass
 def ProportionalModificationTool(*args, **keywords): pass
