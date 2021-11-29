@@ -1,11 +1,20 @@
 import maya.cmds as cmds
 
-sels = cmds.ls(sl=True)
+def ColorChanger(color):
+    colors = ["Clear", "Black", "Dark Grey", "Maroon", "Dark Blue", "Light Blue", "DarkGreen",
+              "Purple", "Lavender", "Light Brown", "Brown", "Rust", "Red", "Green", "Blue", "White",
+              "Yellow", "Teal", "Seafoam", "Pink"]
 
-cmds.circle(name="_Ctrl")
-cmds.group("_Ctrl", name="_Ctrl_Grp")
+    if isinstance(color, str):
+        color = colors.index(color)
 
-cmds.setAttr("_Ctrl.overrideEnabled", True)
-cmds.setAttr("_Ctrl.overrideColor", 5)
+    sels = cmds.ls(sl=True)
+    print(sels)
 
-cmds.matchTransform("_Ctrl", "joint1")
+    for sel in sels:
+        shape = "".join(cmds.listRelatives(sel, shapes = True))
+        print(shape)
+        cmds.setAttr(shape + ".overrideEnabled", True)
+        cmds.setAttr(shape + ".overrideColor", color)
+
+ColorChanger(5)
