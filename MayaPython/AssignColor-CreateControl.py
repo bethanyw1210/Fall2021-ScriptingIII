@@ -1,20 +1,34 @@
 import maya.cmds as cmds
 
-def ColorChanger(color):
+def colorChanger(color):
     colors = ["Clear", "Black", "Dark Grey", "Maroon", "Dark Blue", "Light Blue", "DarkGreen",
               "Purple", "Lavender", "Light Brown", "Brown", "Rust", "Red", "Green", "Blue", "White",
               "Yellow", "Teal", "Seafoam", "Pink"]
 
     if isinstance(color, str):
-        color = colors.index(color)
+        colIndex = colors.index(color)
+    else:
+        colIndex = color
 
+    items = cmds.ls(sl=True)
+    for i in items:
+        shape = "".join(cmds.listRelatives(i, shapes = True))
+        cmds.setAttr(shape + ".overrideEnabled", 1)
+        cmds.setAttr(shape + ".overrideColor", colIndex)
+
+
+def createAndGroupControl(input):
     sels = cmds.ls(sl=True)
-    print(sels)
 
     for sel in sels:
-        shape = "".join(cmds.listRelatives(sel, shapes = True))
-        print(shape)
-        cmds.setAttr(shape + ".overrideEnabled", True)
-        cmds.setAttr(shape + ".overrideColor", color)
+        name = list(sel.rpartition("_"))
+        while("" in name):
+            name.remove("")
+        ctrl = cmds.circle(normal = (0,1,0), name = f"{name[0]}_Ctrl")[0]
+        grp = cmds.group(ctrl, name = f"{name[0]}_Ctrl_Grp")
+        cmds.matchTransform(grp, sel)
+        cmds.select(ctrl, replace = True)
+        colorChanger(input)
 
-ColorChanger(5)
+
+createAndGroupControl(13)
