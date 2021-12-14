@@ -6,15 +6,12 @@ def ColorChanger(color):
               "Yellow", "Teal", "Seafoam", "Pink"]
 
     if isinstance(color, str):
-        color = colors.index(color)
+        colIndex = colors.index(color)
+    else:
+        colIndex = color
 
-    sels = cmds.ls(sl=True)
-    print(sels)
-
-    for sel in sels:
-        shape = "".join(cmds.listRelatives(sel, shapes = True))
-        print(shape)
-        cmds.setAttr(shape + ".overrideEnabled", True)
-        cmds.setAttr(shape + ".overrideColor", color)
-
-ColorChanger(5)
+    items = cmds.ls(sl=True)
+    for i in items:
+        shape = "".join(cmds.listRelatives(i, shapes = True))
+        cmds.setAttr(shape + ".overrideEnabled", 1)
+        cmds.setAttr(shape + ".overrideColor", colIndex)

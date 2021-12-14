@@ -13,5 +13,3 @@ def Rename(name, countStart = 1):
     for index, sel in enumerate(sels, start = countStart):
          newName = nameParts[0] + str(index).zfill(numberOfCharacters) + nameParts[2]
          cmds.rename(sel, newName)
-
-Rename("Leg_##_Jnt", 1)
